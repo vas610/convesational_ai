@@ -1,0 +1,52 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.1.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-docstring-first
+    -   id: check-json
+    -   id: check-added-large-files
+    -   id: check-yaml
+        args:
+          - "--unsafe"
+    -   id: debug-statements
+    -   id: name-tests-test
+    -   id: requirements-txt-fixer
+-   repo: local
+    hooks:
+      - id: autoflake
+        name: Remove unused variables and imports
+        entry: bash -c 'autoflake "$@"; git add -u' --
+        language: python
+        args:
+          [
+            "--in-place",
+            "--remove-all-unused-imports",
+            "--remove-unused-variables",
+            "--expand-star-imports",
+            "--ignore-init-module-imports",
+          ]
+        files: \.py$
+      - id: isort
+        name: Sorting import statements
+        entry: bash -c 'isort "$@"; git add -u' --
+        language: python
+        args: ["--filter-files"]
+        files: \.py$
+      - id: black
+        name: Black Python code formatting
+        entry: bash -c 'black "$@"; git add -u' --
+        language: python
+        types: [python]
+        args: ["--line-length=120"]
+-   repo: https://github.com/asottile/add-trailing-comma
+    rev: v2.2.1
+    hooks:
+    -   id: add-trailing-comma
+        args: [--py36-plus]
+-   repo: https://github.com/asottile/setup-cfg-fmt
+    rev: v1.20.0
+    hooks:
+    -   id: setup-cfg-fmt
+        args: [setup-cfg-fmt api_v1/setup.py]
