@@ -5,12 +5,11 @@ from dotenv import load_dotenv
 
 import retrieve_from_llama2 as llama2
 
-
 # Get Env Variables
 
-load_dotenv() # load the values for environment variables from the .env file
+load_dotenv()  # load the values for environment variables from the .env file
 
-MAX_HISTORY_LENGTH=os.environ.get('MAX_HISTORY_LENGTH')
+MAX_HISTORY_LENGTH = os.environ.get("MAX_HISTORY_LENGTH")
 
 ###Global variables:###
 st.session_state["llm_app"] = llama2
@@ -18,7 +17,7 @@ st.session_state["llm_chain"] = llama2.build_chain()
 
 
 ###Initial UI configuration:###
-st.set_page_config(page_title="AI HelpBot", page_icon="🚀")
+st.set_page_config(page_title="AI HelpBot", page_icon="🚀", layout="wide")
 
 
 def render_app():
@@ -107,14 +106,17 @@ def render_app():
                 output = {}
                 output["answer"] = "I'm sorry I'm not unable to respond to your question 😔"
             answer = output.get("answer")
-            if 'source_documents' in output:
+            if "source_documents" in output:
                 with st.expander("Sources"):
-                    for _sd in output.get('source_documents'):
+                    for _sd in output.get("source_documents"):
                         _sd_metadata = _sd.metadata
-                        source = _sd_metadata.get('source').replace('./aws_docs/sagemaker/', 'https://docs.aws.amazon.com/sagemaker/latest/dg/')
-                        title = _sd_metadata.get('title')
+                        source = _sd_metadata.get("source").replace(
+                            "./aws_docs/sagemaker/",
+                            "https://docs.aws.amazon.com/sagemaker/latest/dg/",
+                        )
+                        title = _sd_metadata.get("title")
                         st.write(f"{title} --> {source}")
-            answer_placeholder.markdown(answer + "▌")    
+            answer_placeholder.markdown(answer + "▌")
             # Add assistant response to chat history
             st.session_state.chat_dialogue.append({"role": "assistant", "content": answer})
         col1, col2 = st.columns([10, 4])

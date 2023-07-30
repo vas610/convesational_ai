@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 import os
-import sys
 
 from dotenv import load_dotenv
 from langchain import PromptTemplate, SagemakerEndpoint
@@ -17,12 +16,12 @@ from langchain.vectorstores import FAISS
 # Get Env Variables
 
 
-load_dotenv() # load the values for environment variables from the .env file
+load_dotenv()  # load the values for environment variables from the .env file
 
-AWS_REGION=os.environ.get('AWS_REGION')
-EMBEDDING_MODEL=os.environ.get('EMBEDDING_MODEL')
-LLAMA2_ENDPOINT=os.environ.get('LLAMA2_ENDPOINT')
-MAX_HISTORY_LENGTH=os.environ.get('MAX_HISTORY_LENGTH')
+AWS_REGION = os.environ.get("AWS_REGION")
+EMBEDDING_MODEL = os.environ.get("EMBEDDING_MODEL")
+LLAMA2_ENDPOINT = os.environ.get("LLAMA2_ENDPOINT")
+MAX_HISTORY_LENGTH = os.environ.get("MAX_HISTORY_LENGTH")
 
 
 def build_chain():
@@ -31,7 +30,7 @@ def build_chain():
     embeddings = SentenceTransformerEmbeddings(model_name=EMBEDDING_MODEL)
 
     # Laod Faiss index
-    db = FAISS.load_local("faiss_index_aws", embeddings)
+    db = FAISS.load_local("faiss_index", embeddings)
 
     # Default system prompt for the LLamav2 on SageMaker Jumpstart Endpoint
     system_prompt = """You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
@@ -70,10 +69,10 @@ def build_chain():
         endpoint_name=LLAMA2_ENDPOINT,
         region_name=AWS_REGION,
         content_handler=ContentHandler(),
-        callbacks=[StreamingStdOutCallbackHandler()],
+        # credentials_profile_name="credentials-profile-name", # AWS Credentials profile name 
+        # callbacks=[StreamingStdOutCallbackHandler()],
         endpoint_kwargs={"CustomAttributes": "accept_eula=true"},
     )
-
 
     def get_chat_history(inputs) -> str:
         res = []
@@ -110,4 +109,3 @@ def build_chain():
 
 def run_chain(chain, prompt: str, history=[]):
     return chain({"question": prompt, "chat_history": history})
-

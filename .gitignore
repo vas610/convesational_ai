@@ -18,6 +18,9 @@ venv*
 glibc*
 aws_docs/lambda/*.html
 aws_docs/sagemaker/*.html
+faiss_index*
+*.index
+*.faiss
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
