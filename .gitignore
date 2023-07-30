@@ -1,3 +1,24 @@
+*packaged.yml*
+.vscode/settings.json
+*.egg-info*
+monitoring_dashboard.cfg
+.aws-sam/*
+venv*
+*.ipynb_checkpoint*
+sample_notebooks/
+.vscode/settings.json
+*.egg-info*
+monitoring_dashboard.cfg
+.aws-sam/*
+venv*
+*text_blob*
+*nyc*
+*.zip
+*.bin
+glibc*
+aws_docs/lambda/*.html
+aws_docs/sagemaker/*.html
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
