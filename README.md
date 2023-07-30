@@ -1,9 +1,9 @@
 # Convesational AI
-Conversational AI application built using LangChain, Llama2 and Streamlit
+Conversational AI application: Chat with your documents 📚 using Llama2 🦙, AWS SageMaker 🧠, LangChain 🦜️🔗 and Streamlit 🔥
 
 ## Running this application
 
-1. Clone this repo
+1. Clone this repo ⏬ 
 
     ```bash
     git clone https://github.com/vas610/convesational_ai.git
@@ -11,7 +11,7 @@ Conversational AI application built using LangChain, Llama2 and Streamlit
     cd convesational_ai
     ```
 
-2. Create conda environment
+2. Create conda 🐍 environment 
 
     ```bash
     conda env create -f environment.yml python=3.10  # conda 22.9.0
@@ -23,22 +23,24 @@ Conversational AI application built using LangChain, Llama2 and Streamlit
     python -m ipykernel install --user --name=conda_docai
     ```
 
-3. Download required data
+3. Download required data 🔠
 
     ```bash
     wget --quiet https://docs.aws.amazon.com/sagemaker/latest/dg/sitemap.xml --output-document - | egrep -o "https://[^<]+" | wget --directory-prefix=./aws_docs/sagemaker/ -i -
     ```
 
-4. Create and Store Embeddings
+4. Create and Store Embeddings 1️⃣0️⃣
 
     ```bash
     ./dataprep.py
     ```
 
-5. Setup a SageMaker Endpoint with Llama2 by following [this](https://aws.amazon.com/blogs/machine-learning/llama-2-foundation-models-from-meta-are-now-available-in-amazon-sagemaker-jumpstart/) blog. I have used the `meta-textgeneration-llama-2-7b-f` model . Also, update the endpoint name in the .env file
+5. Setup a SageMaker Endpoint with Llama2 🦙 by following [this](https://aws.amazon.com/blogs/machine-learning/llama-2-foundation-models-from-meta-are-now-available-in-amazon-sagemaker-jumpstart/) blog. I have used the `meta-textgeneration-llama-2-7b-f` model . Also, update the endpoint name in the .env file
 
-6. Run the below command to start the streamlit app
+6. Run the below command to start the streamlit app 🔥
 
     ```bash
     streamlit run streamlit_app.py --server.address 0.0.0.0 --server.port 8080 --server.fileWatcherType none --browser.gatherUsageStats False
     ```
+
+__________________________________________________________________
