@@ -43,4 +43,9 @@ Conversational AI application: Chat with your documents 📚 using Llama2 🦙, 
     streamlit run streamlit_app.py --server.address 0.0.0.0 --server.port 8080 --server.fileWatcherType none --browser.gatherUsageStats False
     ```
 
+
+
+https://github.com/vas610/convesational_ai/assets/64650227/f3433ca7-62e2-473b-a3b3-7ef4c7644a19
+
+
 __________________________________________________________________
